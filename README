@@ -1,0 +1,19 @@
+== RubyURL
+
+This project is the source code for the application that powers Rubyurl.com. 
+
+* http://rubyurl.com
+
+Feel free to start your own URL-shortening service!
+
+== Bugs and/or Feedback
+
+Feel free to submit tickets to the Rubyurl ticket system.
+
+* http://planetargon.lighthouseapp.com/projects/4059-rubyurl
+
+== Authors
+
+Robby Russell <robby@planetargon.com>
+Chris Griffin <chris.griffin@planetargon.com>
+

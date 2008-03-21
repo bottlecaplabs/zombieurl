@@ -1,0 +1,20 @@
+<div id="app_content">
+	<h1>Here is your RubyURL</h1>
+
+	<div id="url" class="arrow">
+		<%= link_to @link.permalink, @link.permalink -%>
+	</div>
+
+	<dl id="url_stats">
+		<dt>Original URL Length:</dt> 
+		<dd><%= @link.website_url.length -%> characters</dd>
+		<dt>RubyURL Length:</dt> 
+		<dd><%= @link.permalink.length -%> characters</dd>
+		<dt>shortened by:</dt> 
+		<dd><%= @link.website_url.length - @link.permalink.length -%> characters</dd>
+	</dl>
+
+	<div id="action">
+		<%= link_to 'Create another rubyurl', '/' -%> &#8617;
+	</div>
+</div><!-- end app_content -->
