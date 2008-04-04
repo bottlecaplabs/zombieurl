@@ -8,6 +8,10 @@ class LinksController < ApplicationController
     @link = Link.new
     render :action => 'index'
   end
+  
+  def show
+    @link = Link.find_by_token params[:token]
+  end
 
   def create
     website_url = params.include?(:website_url) ? params[:website_url] : params[:link][:website_url]
