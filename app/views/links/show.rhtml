@@ -1,4 +1,12 @@
-<frameset>
-	<frame src="" border="0" /> 
-	<frame src="<%= @link.website_url %>"  />
+<frameset rows="*"> 
+
+	<frame id="theirs" src="<%= @link.website_url %>"  fameborder="0" />
+
+	<noframes>
+		<body>
+				<p>
+					Your browser does not support frames. Google uses frames to display image results. You can view the <a href="http://www.mccullagh.org/photo/1ds-17/zombie-market-street">referring page</a> for this image.
+				</p>
+			</body>
+	</noframes>
 </frameset>
