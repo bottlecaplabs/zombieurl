@@ -1,3 +1,9 @@
+var Zombie = {};
+Zombie.delay = 1500;
 $(function() {
-	$('a#zombie').lightBox().click();
+   $('iframe.viewing').load(function(){
+      setTimeout(function(){
+         $('a#zombie').lightBox().click();         
+      }, Zombie.delay)
+   });
 });
