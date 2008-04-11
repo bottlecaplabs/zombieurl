@@ -137,7 +137,7 @@
 			var arrPageScroll = ___getPageScroll();
 			// Calculate top and left offset for the jquery-lightbox div object and show it
 			$('#jquery-lightbox').css({
-				top:	arrPageScroll[1] + (arrPageSizes[3] / 10),
+				//top:	arrPageScroll[1] + (arrPageSizes[3] / 10),
 				left:	arrPageScroll[0]
 			}).show();
 			// Assigning click events in elements to close overlay
@@ -205,7 +205,7 @@
 			var intDiffH = intCurrentHeight - intHeight;
 			// Perfomance the effect
 			$('#lightbox-container-image-box').show(function(){
-				_show_image();	
+				$('#lightbox-image').show();
 			})
 			$('#lightbox-nav-btnPrev,#lightbox-nav-btnNext').css({ height: intImageHeight + (settings.containerBorderSize * 2) }); 
 			$('#lightbox-container-image-data-box').css({ width: intImageWidth });
@@ -216,10 +216,7 @@
 		 */
 		function _show_image() {
 			$('#lightbox-loading').hide();
-			$('#lightbox-image').show(function() {
-				// _show_image_data();
-				// _set_navigation();
-			});
+			$('#lightbox-image').show();
 			// _preload_neighbor_images();
 		};
 		/**
