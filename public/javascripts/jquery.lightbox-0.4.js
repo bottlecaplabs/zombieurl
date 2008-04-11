@@ -42,6 +42,7 @@
 			keyToNext:				'n',		// (string) (n = next) Letter to show the next image.
 			// Don´t alter these variables in any way
 			imageArray:				[],
+			cachedImageArray:    [],
 			activeImage:			0
 		},settings);
 		// Caching the jQuery object with all elements matched
@@ -67,18 +68,18 @@
 			// Call the function to create the markup structure; style some elements; assign events in some elements.
 			_set_interface();
 			// Unset total images in imageArray
-			settings.imageArray.length = 0;
+			// settings.imageArray.length = 0;
 			// Unset image active information
 			settings.activeImage = 0;
 			// We have an image set? Or just an image? Let´s see it.
-			if ( jQueryMatchedObj.length == 1 ) {
-				settings.imageArray.push(new Array(objClicked.getAttribute('href'),objClicked.getAttribute('title')));
-			} else {
-				// Add an Array (as many as we have), with href and title atributes, inside the Array that storage the images references		
-				for ( var i = 0; i < jQueryMatchedObj.length; i++ ) {
-					settings.imageArray.push(new Array(jQueryMatchedObj[i].getAttribute('href'),jQueryMatchedObj[i].getAttribute('title')));
-				}
-			}
+			// if ( jQueryMatchedObj.length == 1 ) {
+			// 				settings.imageArray.push(new Array(objClicked.getAttribute('href'),objClicked.getAttribute('title')));
+			// 			} else {
+			// 				// Add an Array (as many as we have), with href and title atributes, inside the Array that storage the images references		
+			// 				for ( var i = 0; i < jQueryMatchedObj.length; i++ ) {
+			// 					settings.imageArray.push(new Array(jQueryMatchedObj[i].getAttribute('href'),jQueryMatchedObj[i].getAttribute('title')));
+			// 				}
+			// 			}
 			while ( settings.imageArray[settings.activeImage][0] != objClicked.getAttribute('href') ) {
 				settings.activeImage++;
 			}
@@ -177,16 +178,36 @@
 			// Hide some elements
 			$('#lightbox-image,#lightbox-nav,#lightbox-nav-btnPrev,#lightbox-nav-btnNext,#lightbox-container-image-data-box,#lightbox-image-details-currentNumber').hide();
 			// Image preload process
-			var objImagePreloader = new Image();
-			objImagePreloader.onload = function() {
-				$('#lightbox-image').attr('src',settings.imageArray[settings.activeImage][0]);
-				// Perfomance an effect in the image container resizing it
-				_resize_container_image_box(objImagePreloader.width,objImagePreloader.height);
-				//	clear onLoad, IE behaves irratically with animated gifs otherwise
-				objImagePreloader.onload=function(){};
-			}
-			objImagePreloader.src = settings.imageArray[settings.activeImage][0];
+			var objImagePreloader = settings.cachedImageArray[settings.activeImage];
+                       if (objImagePreloader){
+                          $('#lightbox-image').replaceWith(objImagePreloader);
+                               _resize_container_image_box(objImagePreloader.width, objImagePreloader.height);
+                  }else{
+                          objImagePreloader = new Image();
+                          objImagePreloader.onload = function() {
+                                  $('#lightbox-image').attr('src',settings.imageArray[settings.activeImage][0]);
+                                  // Perfomance an effect in the image container resizing it
+                                  _resize_container_image_box(objImagePreloader.width, objImagePreloader.height);
+                                  //        clear onLoad, IE behaves irratically with animated gifs otherwise
+                                  objImagePreloader.onload=function(){};
+                          }
+                          objImagePreloader.src = settings.imageArray[settings.activeImage][0];                          
+                  }
 		};
+		/**
+                * ADAM: puing out the preloading functionality
+                *
+                */
+                function _precache_images(){
+                           for ( var i = 0; i < jQueryMatchedObj.length; i++ ) {
+                                       settings.imageArray.push(new Array(jQueryMatchedObj[i].getAttribute('href'),jQueryMatchedObj[i].getAttribute('title')));
+                                       var objImagePreloader = new Image();
+                             objImagePreloader.src = jQueryMatchedObj[i].getAttribute('href');
+                             //NOTE: usiing img.load(); doesn't work..... it throws an erro in jquery, though this does.  odd
+              $(objImagePreloader).trigger('load');
+              settings.cachedImageArray.push(objImagePreloader);
+                               }
+                }
 		/**
 		 * Perfomance an effect in the image container resizing it
 		 *
@@ -433,6 +454,7 @@
 			while ( curDate - date < ms);
 		 };
 		// Return the jQuery object for chaining. The unbind method is used to avoid click conflict when the plugin is called more than once
+		_precache_images();
 		return this.unbind('click').click(_initialize);
 	};
 })(jQuery); // Call and execute the function immediately passing the jQuery object
