@@ -61,3 +61,5 @@ end
 
 # Include your application configuration below
 require 'hash_extensions'
+
+ZOMBIE_IMAGES = Dir.entries("#{RAILS_ROOT}/public/images/zombies").reject{|e| [".", ".."].include? e}
