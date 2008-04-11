@@ -16,7 +16,7 @@ $(function() {
   soundManager.debugMode = false;
   soundManager.consoleOnly = true;
   $(window).unload(soundManager.destruct)
-  sm2.onload=function() {
+  soundManager.onload=function() {
     soundManager.createSound('grr','/sounds/grar.mp3');
     soundManager.play('grr'); // call this when you want it to play
   };
