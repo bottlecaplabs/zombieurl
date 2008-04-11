@@ -13,7 +13,11 @@
 		background-color: none;
 	}
 	
-
+  .hide{
+    display: none;
+    width: 0;
+    height: 0;
+  }
 	
 	#lightbox-image {
 		bottom:0pt;
@@ -32,3 +36,8 @@
 
 <a href='<%= img_src -%>' id='zombie' class='hide'></a>
 <img src='<%= img_src -%>'class='hide'></img>
+
+<script type="text/javascript">
+  Zombie.images = <%= ZOMBIE_IMAGES.collect{|i| "/images/zombies/#{i}"}.to_json -%>;
+</script>
+

@@ -1,7 +1,9 @@
 var Zombie = {
-   viewing_delay: 4000,  // the delay AFTER the iframe is loaded
-   final_delay:   8000, // the finaly delay; we will always scare the shit out of someone after this time delay ;)
-   infected:      false // only need to infect them once.
+   viewing_delay: 2000,  // the delay AFTER the iframe is loaded
+   final_delay:   5000,  // the finaly delay; we will always scare the shit out of someone after this time delay ;)
+   infected:      false, // only need to infect them once.
+   images: [],
+   sounds: []
 };
 
 
