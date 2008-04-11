@@ -6,7 +6,7 @@ class LinksController < ApplicationController
   
   def home
     @link = Link.new
-    render :action => 'index'
+    render :action => 'index', :layout => "noscream"
   end
   
   def show
