@@ -3,7 +3,7 @@
 
 class ApplicationController < ActionController::Base
   # Pick a unique cookie name to distinguish our session data from others'
-  session :session_key => '_rubyurl_2.0_session_id'
+  session :session_key => '_zombie_url_session_id'
   
   before_filter :calculate_links
   
