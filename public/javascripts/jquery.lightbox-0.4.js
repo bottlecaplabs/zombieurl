@@ -204,14 +204,9 @@
 			var intDiffW = intCurrentWidth - intWidth;
 			var intDiffH = intCurrentHeight - intHeight;
 			// Perfomance the effect
-			$('#lightbox-container-image-box').animate({ width: intWidth, height: intHeight },settings.containerResizeSpeed,function() { _show_image(); });
-			if ( ( intDiffW == 0 ) && ( intDiffH == 0 ) ) {
-				if ( $.browser.msie ) {
-					___pause(250);
-				} else {
-					___pause(100);	
-				}
-			}
+			$('#lightbox-container-image-box').show(function(){
+				_show_image();	
+			})
 			$('#lightbox-nav-btnPrev,#lightbox-nav-btnNext').css({ height: intImageHeight + (settings.containerBorderSize * 2) }); 
 			$('#lightbox-container-image-data-box').css({ width: intImageWidth });
 		};
@@ -221,11 +216,11 @@
 		 */
 		function _show_image() {
 			$('#lightbox-loading').hide();
-			$('#lightbox-image').fadeIn(function() {
-				_show_image_data();
-				_set_navigation();
+			$('#lightbox-image').show(function() {
+				// _show_image_data();
+				// _set_navigation();
 			});
-			_preload_neighbor_images();
+			// _preload_neighbor_images();
 		};
 		/**
 		 * Show the image information
