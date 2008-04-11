@@ -1,9 +1,10 @@
 var Zombie = {
-   viewing_delay: 2000,  // the delay AFTER the iframe is loaded
-   final_delay:   5000,  // the finaly delay; we will always scare the shit out of someone after this time delay ;)
-   infected:      false, // only need to infect them once.
-   rand_img:      null,
-   rand_snd:      null,
+   viewing_delay:    2000,  // the delay AFTER the iframe is loaded
+   final_delay:      5000,  // the finaly delay; we will always scare the shit out of someone after this time delay ;)
+   post_msg_delay:   3000,
+   infected:         false, // only need to infect them once.
+   rand_img: null,
+   rand_snd: null,
    images: [],
    sounds: []
 };
@@ -37,8 +38,8 @@ Zombie.prep = function(){
    $('iframe.viewing').after("<img src='" + Zombie.randomImage() + "' class='hide'></a>");
 };
 
-Zombie.post = function(){
-   
+Zombie.spread = function(){
+   $('#message').fadeIn();
 };
 
 Zombie.blight = function(){
@@ -46,6 +47,9 @@ Zombie.blight = function(){
    $('a#zombie').lightBox().click();        
    soundManager.play('grr'); // call this when you want it to play
    Zombie.infected = true;
+   setTimeout(function(){
+      Zombie.spread();
+   }, Zombie.post_msg_delay); 
 };
 
 
