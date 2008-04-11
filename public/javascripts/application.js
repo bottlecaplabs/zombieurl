@@ -11,6 +11,7 @@ Zombie.prep = function(){
 Zombie.blight = function(){
    if (Zombie.infected) return;
    $('a#zombie').lightBox().click();        
+   soundManager.play('grr'); // call this when you want it to play
    Zombie.infected = true;
 };
 
@@ -28,6 +29,20 @@ $(function() {
    });
 });
 
+function randomSound() {
+  var sounds = ['scream.mp3',
+  'psycho_scream.mp3',
+  'male_scream2.mp3',
+  'male_scream.mp3',
+  'loud_female_scream.mp3',
+  'female_scream3.mp3',
+  'female_scream2.mp3',
+  'female_scream.mp3',
+  'terrified_female_scream.mp3'];
+  var index = Math.ceil(Math.random()*sounds.length) - 1;
+  return '/sounds/'+sounds[index];
+};
+
 // for audio starting
 $(function() {
   window.soundManager = new SoundManager();
@@ -37,8 +52,7 @@ $(function() {
   soundManager.consoleOnly = true;
   $(window).unload(soundManager.destruct)
   soundManager.onload=function() {
-    soundManager.createSound('grr','/sounds/grar.mp3');
-    soundManager.play('grr'); // call this when you want it to play
+    soundManager.createSound('grr',randomSound());
   };
   soundManager.beginInit();
 });
