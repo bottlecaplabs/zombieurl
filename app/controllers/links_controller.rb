@@ -20,7 +20,7 @@ class LinksController < ApplicationController
     
     if @link.save
       calculate_links # application controller, refactor soon
-      render :action => :show
+      redirect_to :action => "show", :token => @link.token
     else
       flash[:warning] = 'There was an issue trying to create your RubyURL.'
       redirect_to :action => :invalid
