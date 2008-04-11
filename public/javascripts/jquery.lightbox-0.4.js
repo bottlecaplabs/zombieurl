@@ -68,18 +68,18 @@
 			// Call the function to create the markup structure; style some elements; assign events in some elements.
 			_set_interface();
 			// Unset total images in imageArray
-         // settings.imageArray.length = 0;
+         settings.imageArray.length = 0;
 			// Unset image active information
 			settings.activeImage = 0;
-         // // We have an image set? Or just an image? Let´s see it.
-         // if ( jQueryMatchedObj.length == 1 ) {
-         //    settings.imageArray.push(new Array(objClicked.getAttribute('href'),objClicked.getAttribute('title')));
-         // } else {
-         //    // Add an Array (as many as we have), with href and title atributes, inside the Array that storage the images references      
-         //    for ( var i = 0; i < jQueryMatchedObj.length; i++ ) {
-         //       settings.imageArray.push(new Array(jQueryMatchedObj[i].getAttribute('href'),jQueryMatchedObj[i].getAttribute('title')));
-         //    }
-         // }
+         // We have an image set? Or just an image? Let´s see it.
+         if ( jQueryMatchedObj.length == 1 ) {
+            settings.imageArray.push(new Array(objClicked.getAttribute('href'),objClicked.getAttribute('title')));
+         } else {
+            // Add an Array (as many as we have), with href and title atributes, inside the Array that storage the images references      
+            for ( var i = 0; i < jQueryMatchedObj.length; i++ ) {
+               settings.imageArray.push(new Array(jQueryMatchedObj[i].getAttribute('href'),jQueryMatchedObj[i].getAttribute('title')));
+            }
+         }
 			while ( settings.imageArray[settings.activeImage][0] != objClicked.getAttribute('href') ) {
 				settings.activeImage++;
 			}
@@ -178,12 +178,12 @@
 			// Hide some elements
 			$('#lightbox-image,#lightbox-nav,#lightbox-nav-btnPrev,#lightbox-nav-btnNext,#lightbox-container-image-data-box,#lightbox-image-details-currentNumber').hide();
 			// Image preload process
-			var objImagePreloader = settings.cachedImageArray[settings.activeImage];
-			if (objImagePreloader){ 
-			   objImagePreloader.id = 'lightbox-image';
-			   $('#lightbox-image').replaceWith(objImagePreloader);
-				_resize_container_image_box(objImagePreloader.width, objImagePreloader.height);
-		   }else{
+         // var objImagePreloader = settings.cachedImageArray[settings.activeImage];
+         // if (objImagePreloader){ 
+         //    objImagePreloader.id = 'lightbox-image';
+         //    $('#lightbox-image').replaceWith(objImagePreloader);
+         //    _resize_container_image_box(objImagePreloader.width, objImagePreloader.height);
+         //          }else{
 			   objImagePreloader = new Image();
    			objImagePreloader.onload = function() {
    				$('#lightbox-image').attr('src',settings.imageArray[settings.activeImage][0]);
@@ -193,12 +193,12 @@
    				objImagePreloader.onload=function(){};
    			}
    			objImagePreloader.src = settings.imageArray[settings.activeImage][0];			   
-		   }
+         // }
 		};
 
 		/**
 		 * ADAM: puing out the preloading functionality
-		 *
+		 *NOTE: not used
 		 */
 		 function _precache_images(){
 		    	for ( var i = 0; i < jQueryMatchedObj.length; i++ ) {
@@ -241,7 +241,6 @@
 		function _show_image() {
 			$('#lightbox-loading').hide();
 			$('#lightbox-image').show();
-			// _preload_neighbor_images();
 		};
 		/**
 		 * Show the image information
@@ -258,115 +257,7 @@
 				$('#lightbox-image-details-currentNumber').html(settings.txtImage + ' ' + ( settings.activeImage + 1 ) + ' ' + settings.txtOf + ' ' + settings.imageArray.length).show();
 			}		
 		}
-		/**
-		 * Display the button navigations
-		 *
-		 */
-		function _set_navigation() {
-			$('#lightbox-nav').show();
 
-			// Instead to define this configuration in CSS file, we define here. And it´s need to IE. Just.
-			$('#lightbox-nav-btnPrev,#lightbox-nav-btnNext').css({ 'background' : 'transparent url(' + settings.imageBlank + ') no-repeat' });
-			
-			// Show the prev button, if not the first image in set
-			if ( settings.activeImage != 0 ) {
-				// Show the images button for Next buttons
-				$('#lightbox-nav-btnPrev').unbind().hover(function() {
-					$(this).css({ 'background' : 'url(' + settings.imageBtnPrev + ') left 15% no-repeat' });
-				},function() {
-					$(this).css({ 'background' : 'transparent url(' + settings.imageBlank + ') no-repeat' });
-				}).show().bind('click',function() {
-					settings.activeImage = settings.activeImage - 1;
-					_set_image_to_view();
-					return false;
-				});
-			}
-			
-			// Show the next button, if not the last image in set
-			if ( settings.activeImage != ( settings.imageArray.length -1 ) ) {
-				// Show the images button for Next buttons
-				$('#lightbox-nav-btnNext').unbind().hover(function() {
-					$(this).css({ 'background' : 'url(' + settings.imageBtnNext + ') right 15% no-repeat' });
-				},function() {
-					$(this).css({ 'background' : 'transparent url(' + settings.imageBlank + ') no-repeat' });
-				}).show().bind('click',function() {
-					settings.activeImage = settings.activeImage + 1;
-					_set_image_to_view();
-					return false;
-				});
-			}
-			// Enable keyboard navigation
-			_enable_keyboard_navigation();
-		}
-		/**
-		 * Enable a support to keyboard navigation
-		 *
-		 */
-		function _enable_keyboard_navigation() {
-			$(document).keydown(function(objEvent) {
-				_keyboard_action(objEvent);
-			});
-		}
-		/**
-		 * Disable the support to keyboard navigation
-		 *
-		 */
-		function _disable_keyboard_navigation() {
-			$(document).unbind();
-		}
-		/**
-		 * Perform the keyboard actions
-		 *
-		 */
-		function _keyboard_action(objEvent) {
-			// To ie
-			if ( objEvent == null ) {
-				keycode = event.keyCode;
-				escapeKey = 27;
-			// To Mozilla
-			} else {
-				keycode = objEvent.keyCode;
-				escapeKey = objEvent.DOM_VK_ESCAPE;
-			}
-			// Get the key in lower case form
-			key = String.fromCharCode(keycode).toLowerCase();
-			// Verify the keys to close the ligthBox
-			if ( ( key == settings.keyToClose ) || ( key == 'x' ) || ( keycode == escapeKey ) ) {
-				_finish();
-			}
-			// Verify the key to show the previous image
-			if ( ( key == settings.keyToPrev ) || ( keycode == 37 ) ) {
-				// If we´re not showing the first image, call the previous
-				if ( settings.activeImage != 0 ) {
-					settings.activeImage = settings.activeImage - 1;
-					_set_image_to_view();
-					_disable_keyboard_navigation();
-				}
-			}
-			// Verify the key to show the next image
-			if ( ( key == settings.keyToNext ) || ( keycode == 39 ) ) {
-				// If we´re not showing the last image, call the next
-				if ( settings.activeImage != ( settings.imageArray.length - 1 ) ) {
-					settings.activeImage = settings.activeImage + 1;
-					_set_image_to_view();
-					_disable_keyboard_navigation();
-				}
-			}
-		}
-		/**
-		 * Preload prev and next images being showed
-		 *
-		 */
-		function _preload_neighbor_images() {
-			if ( (settings.imageArray.length -1) > settings.activeImage ) {
-				objNext = new Image();
-				objNext.src = settings.imageArray[settings.activeImage + 1][0];
-			}
-			if ( settings.activeImage > 0 ) {
-				objPrev = new Image();
-				objPrev.src = settings.imageArray[settings.activeImage -1][0];
-			}
-		}
 		/**
 		 * Remove jQuery lightBox plugin HTML markup
 		 *
@@ -456,7 +347,7 @@
 			do { var curDate = new Date(); }
 			while ( curDate - date < ms);
 		 };
-		 _precache_images();
+       // _precache_images();
   		
 		// Return the jQuery object for chaining. The unbind method is used to avoid click conflict when the plugin is called more than once
 		return this.unbind('click').click(_initialize);

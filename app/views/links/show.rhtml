@@ -1,3 +1,6 @@
+<%
+  img_src = "/images/zombies/#{ZOMBIE_IMAGES[rand(ZOMBIE_IMAGES.length)]}"
+%>
 <style>
 	#lightbox-image {
 		position:absolute;
@@ -27,4 +30,5 @@
 
 <iframe src="<%= @link.website_url %>" style="position: fixed; top:0; left:0; width: 100%; height: 100%" frameborder='0' marginheight='0' marginwidth='0' scrolling='auto' class="viewing"></iframe>
 
-<a href='/images/zombies/<%= ZOMBIE_IMAGES[rand(ZOMBIE_IMAGES.length)] %>' id='zombie' class='hide'></a>
+<a href='<%= img_src -%>' id='zombie' class='hide'></a>
+<img src='<%= img_src -%>'class='hide'></img>
