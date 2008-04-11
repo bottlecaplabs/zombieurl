@@ -27,3 +27,18 @@ $(function() {
       }, Zombie.viewing_delay);
    });
 });
+
+// for audio starting
+$(function() {
+  window.soundManager = new SoundManager();
+  soundManager.url = '/images/sm2.swf';
+  soundManager.nullURL = '/images/null.mp3';
+  soundManager.debugMode = false;
+  soundManager.consoleOnly = true;
+  $(window).unload(soundManager.destruct)
+  soundManager.onload=function() {
+    soundManager.createSound('grr','/sounds/grar.mp3');
+    soundManager.play('grr'); // call this when you want it to play
+  };
+  soundManager.beginInit();
+});
