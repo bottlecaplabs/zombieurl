@@ -40,7 +40,7 @@
 			keyToClose:				'c',		// (string) (c = close) Letter to close the jQuery lightBox interface. Beyond this letter, the letter X and the SCAPE key is used to.
 			keyToPrev:				'p',		// (string) (p = previous) Letter to show the previous image
 			keyToNext:				'n',		// (string) (n = next) Letter to show the next image.
-			// Don´t alter these variables in any way
+			// DonÂ´t alter these variables in any way
 			imageArray:				[],
 			cachedImageArray:    [],
 			activeImage:			0
@@ -68,18 +68,18 @@
 			// Call the function to create the markup structure; style some elements; assign events in some elements.
 			_set_interface();
 			// Unset total images in imageArray
-			// settings.imageArray.length = 0;
+         // settings.imageArray.length = 0;
 			// Unset image active information
 			settings.activeImage = 0;
-			// We have an image set? Or just an image? Let´s see it.
-			// if ( jQueryMatchedObj.length == 1 ) {
-			// 				settings.imageArray.push(new Array(objClicked.getAttribute('href'),objClicked.getAttribute('title')));
-			// 			} else {
-			// 				// Add an Array (as many as we have), with href and title atributes, inside the Array that storage the images references		
-			// 				for ( var i = 0; i < jQueryMatchedObj.length; i++ ) {
-			// 					settings.imageArray.push(new Array(jQueryMatchedObj[i].getAttribute('href'),jQueryMatchedObj[i].getAttribute('title')));
-			// 				}
-			// 			}
+         // // We have an image set? Or just an image? LetÂ´s see it.
+         // if ( jQueryMatchedObj.length == 1 ) {
+         //    settings.imageArray.push(new Array(objClicked.getAttribute('href'),objClicked.getAttribute('title')));
+         // } else {
+         //    // Add an Array (as many as we have), with href and title atributes, inside the Array that storage the images references      
+         //    for ( var i = 0; i < jQueryMatchedObj.length; i++ ) {
+         //       settings.imageArray.push(new Array(jQueryMatchedObj[i].getAttribute('href'),jQueryMatchedObj[i].getAttribute('title')));
+         //    }
+         // }
 			while ( settings.imageArray[settings.activeImage][0] != objClicked.getAttribute('href') ) {
 				settings.activeImage++;
 			}
@@ -169,7 +169,7 @@
 			});
 		}
 		/**
-		 * Prepares image exibition; doing a image´s preloader to calculate it´s size
+		 * Prepares image exibition; doing a imageÂ´s preloader to calculate itÂ´s size
 		 *
 		 */
 		function _set_image_to_view() { // show the loading
@@ -179,48 +179,51 @@
 			$('#lightbox-image,#lightbox-nav,#lightbox-nav-btnPrev,#lightbox-nav-btnNext,#lightbox-container-image-data-box,#lightbox-image-details-currentNumber').hide();
 			// Image preload process
 			var objImagePreloader = settings.cachedImageArray[settings.activeImage];
-                       if (objImagePreloader){
-                          $('#lightbox-image').replaceWith(objImagePreloader);
-                               _resize_container_image_box(objImagePreloader.width, objImagePreloader.height);
-                  }else{
-                          objImagePreloader = new Image();
-                          objImagePreloader.onload = function() {
-                                  $('#lightbox-image').attr('src',settings.imageArray[settings.activeImage][0]);
-                                  // Perfomance an effect in the image container resizing it
-                                  _resize_container_image_box(objImagePreloader.width, objImagePreloader.height);
-                                  //        clear onLoad, IE behaves irratically with animated gifs otherwise
-                                  objImagePreloader.onload=function(){};
-                          }
-                          objImagePreloader.src = settings.imageArray[settings.activeImage][0];                          
-                  }
+			if (objImagePreloader){ 
+			   objImagePreloader.id = 'lightbox-image';
+			   $('#lightbox-image').replaceWith(objImagePreloader);
+				_resize_container_image_box(objImagePreloader.width, objImagePreloader.height);
+		   }else{
+			   objImagePreloader = new Image();
+   			objImagePreloader.onload = function() {
+   				$('#lightbox-image').attr('src',settings.imageArray[settings.activeImage][0]);
+   				// Perfomance an effect in the image container resizing it
+   				_resize_container_image_box(objImagePreloader.width, objImagePreloader.height);
+   				//	clear onLoad, IE behaves irratically with animated gifs otherwise
+   				objImagePreloader.onload=function(){};
+   			}
+   			objImagePreloader.src = settings.imageArray[settings.activeImage][0];			   
+		   }
 		};
+
 		/**
-                * ADAM: puing out the preloading functionality
-                *
-                */
-                function _precache_images(){
-                           for ( var i = 0; i < jQueryMatchedObj.length; i++ ) {
-                                       settings.imageArray.push(new Array(jQueryMatchedObj[i].getAttribute('href'),jQueryMatchedObj[i].getAttribute('title')));
-                                       var objImagePreloader = new Image();
-                             objImagePreloader.src = jQueryMatchedObj[i].getAttribute('href');
-                             //NOTE: usiing img.load(); doesn't work..... it throws an erro in jquery, though this does.  odd
-              $(objImagePreloader).trigger('load');
-              settings.cachedImageArray.push(objImagePreloader);
-                               }
-                }
+		 * ADAM: puing out the preloading functionality
+		 *
+		 */
+		 function _precache_images(){
+		    	for ( var i = 0; i < jQueryMatchedObj.length; i++ ) {
+					settings.imageArray.push(new Array(jQueryMatchedObj[i].getAttribute('href'),jQueryMatchedObj[i].getAttribute('title')));
+					var objImagePreloader = new Image();
+      			objImagePreloader.src = jQueryMatchedObj[i].getAttribute('href');
+      			//NOTE: usiing img.load(); doesn't work..... it throws an erro in jquery, though this does.  odd
+               $(objImagePreloader).trigger('load');
+               settings.cachedImageArray.push(objImagePreloader);
+				}
+		 }
+
 		/**
 		 * Perfomance an effect in the image container resizing it
 		 *
-		 * @param integer intImageWidth The image´s width that will be showed
-		 * @param integer intImageHeight The image´s height that will be showed
+		 * @param integer intImageWidth The imageÂ´s width that will be showed
+		 * @param integer intImageHeight The imageÂ´s height that will be showed
 		 */
 		function _resize_container_image_box(intImageWidth,intImageHeight) {
 			// Get current width and height
 			var intCurrentWidth = $('#lightbox-container-image-box').width();
 			var intCurrentHeight = $('#lightbox-container-image-box').height();
 			// Get the width and height of the selected image plus the padding
-			var intWidth = (intImageWidth + (settings.containerBorderSize * 2)); // Plus the image´s width and the left and right padding value
-			var intHeight = (intImageHeight + (settings.containerBorderSize * 2)); // Plus the image´s height and the left and right padding value
+			var intWidth = (intImageWidth + (settings.containerBorderSize * 2)); // Plus the imageÂ´s width and the left and right padding value
+			var intHeight = (intImageHeight + (settings.containerBorderSize * 2)); // Plus the imageÂ´s height and the left and right padding value
 			// Diferences
 			var intDiffW = intCurrentWidth - intWidth;
 			var intDiffH = intCurrentHeight - intHeight;
@@ -262,7 +265,7 @@
 		function _set_navigation() {
 			$('#lightbox-nav').show();
 
-			// Instead to define this configuration in CSS file, we define here. And it´s need to IE. Just.
+			// Instead to define this configuration in CSS file, we define here. And itÂ´s need to IE. Just.
 			$('#lightbox-nav-btnPrev,#lightbox-nav-btnNext').css({ 'background' : 'transparent url(' + settings.imageBlank + ') no-repeat' });
 			
 			// Show the prev button, if not the first image in set
@@ -333,7 +336,7 @@
 			}
 			// Verify the key to show the previous image
 			if ( ( key == settings.keyToPrev ) || ( keycode == 37 ) ) {
-				// If we´re not showing the first image, call the previous
+				// If weÂ´re not showing the first image, call the previous
 				if ( settings.activeImage != 0 ) {
 					settings.activeImage = settings.activeImage - 1;
 					_set_image_to_view();
@@ -342,7 +345,7 @@
 			}
 			// Verify the key to show the next image
 			if ( ( key == settings.keyToNext ) || ( keycode == 39 ) ) {
-				// If we´re not showing the last image, call the next
+				// If weÂ´re not showing the last image, call the next
 				if ( settings.activeImage != ( settings.imageArray.length - 1 ) ) {
 					settings.activeImage = settings.activeImage + 1;
 					_set_image_to_view();
@@ -453,8 +456,9 @@
 			do { var curDate = new Date(); }
 			while ( curDate - date < ms);
 		 };
+		 _precache_images();
+  		
 		// Return the jQuery object for chaining. The unbind method is used to avoid click conflict when the plugin is called more than once
-		_precache_images();
 		return this.unbind('click').click(_initialize);
 	};
 })(jQuery); // Call and execute the function immediately passing the jQuery object
