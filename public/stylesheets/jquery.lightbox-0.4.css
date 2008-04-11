@@ -31,9 +31,9 @@
 #jquery-lightbox a img { border: none; }
 #lightbox-container-image-box {
 	position: relative;
-	background-color: #fff;
-	width: 250px;
-	height: 250px;
+/*	background-color: #fff;*/
+/*	width: 250px;*/
+	height: 800px;
 	margin: 0 auto;
 }
 #lightbox-container-image { padding: 10px; }

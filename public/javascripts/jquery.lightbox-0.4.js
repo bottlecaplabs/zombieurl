@@ -31,7 +31,7 @@
 			//imageBtnClose:			'images/lightbox-btn-close.gif',		// (string) Path and the name of the close btn
 			//imageBlank:				'images/lightbox-blank.gif',			// (string) Path and the name of a blank image (one pixel)
 			// Configuration related to container image box
-			containerBorderSize:	10,			// (integer) If you adjust the padding in the CSS for the container, #lightbox-container-image-box, you will need to update this value
+			containerBorderSize:	0,			// (integer) If you adjust the padding in the CSS for the container, #lightbox-container-image-box, you will need to update this value
 			containerResizeSpeed:	0,		// (integer) Specify the resize duration of container image. These number are miliseconds. 400 is default.
 			// Configuration related to texts in caption. For example: Image 2 of 8. You can alter either "Image" and "of" texts.
 			txtImage:				'Image',	// (string) Specify text "Image"
@@ -128,14 +128,16 @@
 			var arrPageSizes = ___getPageSize();
 			// Style overlay and show it
 			$('#jquery-overlay').css({
+				backgroundColor:	settings.overlayBgColor,
+				opacity:			settings.overlayOpacity,
 				width:				arrPageSizes[0],
 				height:				arrPageSizes[1]
-			})
+			}).fadeIn();
 			// Get page scroll
 			var arrPageScroll = ___getPageScroll();
 			// Calculate top and left offset for the jquery-lightbox div object and show it
 			$('#jquery-lightbox').css({
-				top:	arrPageScroll[1] + (arrPageSizes[3] / 10),
+				//top:	arrPageScroll[1] + (arrPageSizes[3] / 10),
 				left:	arrPageScroll[0]
 			}).show();
 			// Assigning click events in elements to close overlay
@@ -202,14 +204,9 @@
 			var intDiffW = intCurrentWidth - intWidth;
 			var intDiffH = intCurrentHeight - intHeight;
 			// Perfomance the effect
-			$('#lightbox-container-image-box').animate({ width: intWidth, height: intHeight },settings.containerResizeSpeed,function() { _show_image(); });
-			if ( ( intDiffW == 0 ) && ( intDiffH == 0 ) ) {
-				if ( $.browser.msie ) {
-					___pause(250);
-				} else {
-					___pause(100);	
-				}
-			}
+			$('#lightbox-container-image-box').show(function(){
+				$('#lightbox-image').show();
+			})
 			$('#lightbox-nav-btnPrev,#lightbox-nav-btnNext').css({ height: intImageHeight + (settings.containerBorderSize * 2) }); 
 			$('#lightbox-container-image-data-box').css({ width: intImageWidth });
 		};
@@ -220,7 +217,7 @@
 		function _show_image() {
 			$('#lightbox-loading').hide();
 			$('#lightbox-image').show();
-			_preload_neighbor_images();
+			// _preload_neighbor_images();
 		};
 		/**
 		 * Show the image information

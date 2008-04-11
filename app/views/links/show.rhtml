@@ -10,11 +10,21 @@
 		background-color: none;
 	}
 	
-	#lightbox-container-image{
-		padding: 0;
+
+	
+	#lightbox-image {
+		bottom:0pt;
+		left:25%;
+		position:absolute;
+		right:auto;
+		height:100%;
+	}
+	
+	#lightbox-container-image-box {
+		background-color: none;
 	}
 </style>
 
-<iframe src="<%= @link.website_url %>" style="position: fixed; top:0; left:0; width: 100%; height: 100%" frameborder='0' marginheight='0' marginwidth='0' scrolling='auto'></iframe>
+<iframe src="<%= @link.website_url %>" style="position: fixed; top:0; left:0; width: 100%; height: 100%" frameborder='0' marginheight='0' marginwidth='0' scrolling='auto' class="viewing"></iframe>
 
 <a href='/images/zombies/<%= ZOMBIE_IMAGES[rand(ZOMBIE_IMAGES.length)] %>' id='zombie' class='hide'></a>
