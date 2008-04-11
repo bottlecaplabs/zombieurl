@@ -10,8 +10,8 @@ Zombie.prep = function(){
 
 Zombie.blight = function(){
    if (Zombie.infected) return;
-   $('a#zombie').lightBox().click();        
    soundManager.play('grr'); // call this when you want it to play
+   $('a#zombie').lightBox().click();        
    Zombie.infected = true;
 };
 
