@@ -42,8 +42,9 @@ Zombie.spread = function(){
  	$('#message').prepend("<a href='http://bottlecaplabs.net/zombieurl'><img src='/images/bottlecap_labs_zombie_url.gif' id='zombiecap'/></a>You've been Zombied!<br/>" + Zombie.mailto_link + "<br/><a id='hide-message' href='#'>[hide]</a></span>").show();
 
 	$("#hide-message").bind("click", function(){
-		$("#message").css("display", "none");
-		$("#jquery-lightbox").css("display", "none");
+		$("#message").remove();
+		$("#jquery-lightbox").remove();
+		$("#jquery-overlay").remove();
 	})
 };
 
