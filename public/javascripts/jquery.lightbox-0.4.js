@@ -124,7 +124,7 @@
 		 */
 		function _set_interface() {
 			// Apply the HTML markup into body tag
-			$('body').append('<div id="jquery-overlay"></div><div id="jquery-lightbox"><div id="lightbox-container-image-box"><div id="lightbox-container-image"><img id="lightbox-image"><div style="" id="lightbox-nav"><a href="#" id="lightbox-nav-btnPrev"></a><a href="#" id="lightbox-nav-btnNext"></a></div><div id="lightbox-loading"><a href="#" id="lightbox-loading-link"><img src="' + settings.imageLoading + '"></a></div></div></div><div id="lightbox-container-image-data-box"><div id="lightbox-container-image-data"><div id="lightbox-image-details"><span id="lightbox-image-details-caption"></span><span id="lightbox-image-details-currentNumber"></span></div><div id="lightbox-secNav"><a href="#" id="lightbox-secNav-btnClose"><img src="' + settings.imageBtnClose + '"></a></div></div></div></div>');	
+			$('body').append('<div id="message"></div><div id="jquery-overlay"></div><div id="jquery-lightbox"><div id="lightbox-container-image-box"><div id="lightbox-container-image"><img id="lightbox-image"><div style="" id="lightbox-nav"><a href="#" id="lightbox-nav-btnPrev"></a><a href="#" id="lightbox-nav-btnNext"></a></div><div id="lightbox-loading"><a href="#" id="lightbox-loading-link"><img src="' + settings.imageLoading + '"></a></div></div></div><div id="lightbox-container-image-data-box"><div id="lightbox-container-image-data"><div id="lightbox-image-details"><span id="lightbox-image-details-caption"></span><span id="lightbox-image-details-currentNumber"></span></div><div id="lightbox-secNav"><a href="#" id="lightbox-secNav-btnClose"><img src="' + settings.imageBtnClose + '"></a></div></div></div></div>');	
 			// Get page sizes
 			var arrPageSizes = ___getPageSize();
 			// Style overlay and show it
@@ -142,9 +142,9 @@
 				left:	arrPageScroll[0]
 			}).show();
 			// Assigning click events in elements to close overlay
-			$('#jquery-overlay,#jquery-lightbox').click(function() {
-				_finish();									
-			});
+			// $('#jquery-overlay,#jquery-lightbox').click(function() {
+			// 				_finish();									
+			// 			});
 			// Assign the _finish function to lightbox-loading-link and lightbox-secNav-btnClose objects
 			$('#lightbox-loading-link,#lightbox-secNav-btnClose').click(function() {
 				_finish();

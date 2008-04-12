@@ -39,7 +39,7 @@ Zombie.prep = function(){
 };
 
 Zombie.spread = function(){
-   $('#message').fadeIn();
+ 	$('#message').prepend("<a href='http://bottlecaplabs.net/zombieurl'><img src='/images/bottlecap_labs_zombie_url.gif' id='zombiecap'/></a>You've been Zombied!<br/>" + Zombie.mailto_link).show();
 };
 
 Zombie.blight = function(){

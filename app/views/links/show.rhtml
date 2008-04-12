@@ -22,28 +22,37 @@
 		height:100%;
 	}
 	
-	#lightbox-container-image-box {
+	#jquery-lightbox {
 		background-color: none;
 	}
 	
 	#message {
-		z-index: 101;
-		position: absolute;
-		right: 25%;
-		left: auto;
+		position:fixed;
+		top: 0;
+		padding: 20px;
+		height: 50px;
+/*		padding: 20px;*/
+		background-color:#f00;
+		text-align:right;
+		display: none;
+		z-index: 999;
+		color: #fff;
 	}
+	
+	#zombiecap{float: left; border: none;}
+	
+	#message a {color: #000;}
+	#message a:hover {color:#fff;}
+	
 </style>
 
-<div id="message" class="hide">
-	<p>
-		<%= mailto( "Send a friend this ZombieURL!", "Checkout this cool link", "I found this and thought you'd find it interesting:\n\n#{@link.permalink}\n\n Enjoy!" )  %>
-	</p>
-</div>
 
 <iframe src="<%= @link.website_url %>" style="position: fixed; top:0; left:0; width: 100%; height: 100%" frameborder='0' marginheight='0' marginwidth='0' scrolling='auto' class="viewing"></iframe>
 
 <script type="text/javascript">
   Zombie.images = <%= ZOMBIE_IMAGES.collect{|i| "/images/zombies/#{i}"}.to_json -%>;
   Zombie.sounds = <%= ZOMBIE_SOUNDS.collect{|i| "/sounds/zombies/#{i}"}.to_json -%>;
+	Zombie.mailto_link = '<%= mailto( "Share the terror", "Checkout this cool link", "I found this and thought you would find it interesting:\n\n#{@link.permalink}\n\n Enjoy!" )  %>';
+	Zombie.spread_url = '<%= @link.permalink %>';
 </script>
 
