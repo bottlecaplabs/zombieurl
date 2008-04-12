@@ -1,6 +1,3 @@
-<%
-  img_src = "/images/zombies/#{ZOMBIE_IMAGES[rand(ZOMBIE_IMAGES.length)]}"
-%>
 <style>
 	#lightbox-image {
 		position:absolute;
@@ -13,7 +10,9 @@
 		background-color: none;
 	}
 	
-
+  .hide{
+    display: none;
+  }
 	
 	#lightbox-image {
 		bottom:0pt;
@@ -28,7 +27,16 @@
 	}
 </style>
 
+<div id="message" class="hide">
+	<p>
+		<%= mailto( "Send a friend this ZombieURL!", "Checkout this cool link", "I found this and thought you'd find it interesting:\n\n#{@link.permalink}\n\n Enjoy!" )  %>
+	</p>
+</div>
+
 <iframe src="<%= @link.website_url %>" style="position: fixed; top:0; left:0; width: 100%; height: 100%" frameborder='0' marginheight='0' marginwidth='0' scrolling='auto' class="viewing"></iframe>
 
-<a href='<%= img_src -%>' id='zombie' class='hide'></a>
-<img src='<%= img_src -%>'class='hide'></img>
+<script type="text/javascript">
+  Zombie.images = <%= ZOMBIE_IMAGES.collect{|i| "/images/zombies/#{i}"}.to_json -%>;
+  Zombie.sounds = <%= ZOMBIE_SOUNDS.collect{|i| "/sounds/zombies/#{i}"}.to_json -%>;
+</script>
+

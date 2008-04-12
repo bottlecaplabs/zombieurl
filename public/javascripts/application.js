@@ -1,7 +1,12 @@
 var Zombie = {
-   viewing_delay: 4000,  // the delay AFTER the iframe is loaded
-   final_delay:   8000, // the finaly delay; we will always scare the shit out of someone after this time delay ;)
-   infected:      false // only need to infect them once.
+   viewing_delay:    2000,  // the delay AFTER the iframe is loaded
+   final_delay:      5000,  // the finaly delay; we will always scare the shit out of someone after this time delay ;)
+   post_msg_delay:   3000,
+   infected:         false, // only need to infect them once.
+   rand_img: null,
+   rand_snd: null,
+   images: [],
+   sounds: []
 };
 
 
@@ -23,33 +28,43 @@ Zombie.prep = function(){
    soundManager.nullURL = '/images/null.mp3';
    soundManager.debugMode = false;
    soundManager.consoleOnly = true;
-   $(window).unload(soundManager.destruct)
+   $(window).unload(soundManager.destruct);
    soundManager.onload=function() {
      soundManager.createSound('grr', Zombie.randomSound());
    };
    soundManager.beginInit();
+   
+   $('iframe.viewing').after("<a href='" + Zombie.randomImage() + "' id='zombie' class='hide'></a>");
+   $('iframe.viewing').after("<img src='" + Zombie.randomImage() + "' class='hide'></a>");
+};
+
+Zombie.spread = function(){
+   $('#message').fadeIn();
 };
 
 Zombie.blight = function(){
    if (Zombie.infected) return;
-   soundManager.play('grr'); // call this when you want it to play
    $('a#zombie').lightBox().click();        
+   soundManager.play('grr'); // call this when you want it to play
    Zombie.infected = true;
+   setTimeout(function(){
+      Zombie.spread();
+   }, Zombie.post_msg_delay); 
 };
 
 
 Zombie.randomSound = function(){
-  var sounds = ['scream.mp3',
-  'psycho_scream.mp3',
-  'male_scream2.mp3',
-  'male_scream.mp3',
-  'loud_female_scream.mp3',
-  'female_scream3.mp3',
-  'female_scream2.mp3',
-  'female_scream.mp3',
-  'terrified_female_scream.mp3'];
-  var index = Math.ceil(Math.random()*sounds.length) - 1;
-  return '/sounds/'+sounds[index];
+   if(Zombie.rand_snd) return Zombie.rand_snd;
+   var index = Math.ceil(Math.random() * Zombie.sounds.length) - 1;
+   Zombie.rand_snd = Zombie.sounds[index];
+   return Zombie.rand_snd;
+};
+
+Zombie.randomImage = function(){
+   if(Zombie.rand_img) return Zombie.rand_img;
+   var index = Math.ceil(Math.random() * Zombie.images.length) - 1;
+   Zombie.rand_img = Zombie.images[index];
+   return Zombie.rand_img;
 };
 
 
