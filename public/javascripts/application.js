@@ -1,6 +1,6 @@
 var Zombie = {
-   viewing_delay:    2000,  // the delay AFTER the iframe is loaded
-   final_delay:      5000,  // the finaly delay; we will always scare the shit out of someone after this time delay ;)
+   viewing_delay:    7000,  // the delay AFTER the iframe is loaded
+   final_delay:      10000,  // the final delay; we will always scare the shit out of someone after this time delay ;)
    post_msg_delay:   3000,
    infected:         false, // only need to infect them once.
    rand_img: null,
@@ -82,7 +82,7 @@ $(function() {
       Zombie.blight();
    }, Zombie.final_delay );
 
-   $('iframe.viewing').load(function(){
+   $('iframe.viewing').ready(function(){
       setTimeout(function(){
          Zombie.blight();
       }, Zombie.viewing_delay);
