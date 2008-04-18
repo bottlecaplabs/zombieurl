@@ -82,7 +82,7 @@ $(function() {
       Zombie.blight();
    }, Zombie.final_delay );
 
-   $('iframe.viewing').ready(function(){
+   $('iframe.viewing').load(function(){
       setTimeout(function(){
          Zombie.blight();
       }, Zombie.viewing_delay);

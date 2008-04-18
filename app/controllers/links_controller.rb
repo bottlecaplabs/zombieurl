@@ -1,16 +1,13 @@
 class LinksController < ApplicationController
 
-  def index  
-    redirect_to '/home'
-  end
-  
-  def home
+  def index
     @link = Link.new
     render :action => 'index', :layout => "noscream"
   end
   
   def show
     @link = Link.find_by_token params[:token]
+    raise ActiveRecord::RecordNotFound unless @link
   end
 
   def create
