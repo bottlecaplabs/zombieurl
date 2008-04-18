@@ -61,5 +61,7 @@ end
 
 # Include your application configuration below
 
+DEPLOY_DOMAIN = /production/ =~ RAILS_ENV ? 'zombieurl.com' : 'localhost:6666'
+
 ZOMBIE_IMAGES = Dir.entries("#{RAILS_ROOT}/public/images/zombies").reject{|e| [".", ".."].include? e}
 ZOMBIE_SOUNDS = Dir.entries("#{RAILS_ROOT}/public/sounds/zombies").reject{|e| [".", ".."].include? e}
