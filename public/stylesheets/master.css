@@ -16,7 +16,7 @@ body {
 }
 
 #header {
-	padding: 80px;
+	padding: 40px 80px;
 }
 
 #form {
@@ -25,7 +25,7 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	font-size: 28px;
-	padding: 50px;
+	padding: 20px 50px;
 }
 
 #form input {
@@ -39,7 +39,11 @@ body {
 
 #footer {
 	font-size: 12px;
-	margin-top: 40px;
-	padding: 50px;
+	margin-top: 20px;
+	padding: 20px;
 	text-align: center;
+}
+
+#amazon {
+   margin-top: 40px;
 }
