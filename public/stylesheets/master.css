@@ -36,6 +36,8 @@ a {
 	font-weight: normal;
 	font-size: 28px;
 	padding: 5px;
+	margin: 5px;
+	border: 1px solid #000;
 }
 
 #bookmarklet { text-align: center;}
