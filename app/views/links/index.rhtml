@@ -8,9 +8,9 @@
 	<div id="form">
 				<%= render :partial => 'links/form' %>
 	</div>
-	
-	<div id="bookmarklet">
-		Or, use the bookmarklet: <a href="javascript:void(location.host=='maps.google.com'?location.href='http://zombieurl.com/zombieurl/remote?website_url='+encodeURIComponent(document.getElementById('link').href):location.href='http://zombieurl.com/zombieurl/remote?website_url='+encodeURIComponent(location.href))">ZombieURL this</a>
+
+	<div id="bookmarklet">		
+		Or, use the bookmarklet: <a href="javascript:void(location.host=='maps.google.com'?location.href='http://<%= DEPLOY_DOMAIN %>/zombieurl/remote?website_url='+encodeURIComponent(document.getElementById('link').href):location.href='http://<%= DEPLOY_DOMAIN %>/zombieurl/remote?website_url='+encodeURIComponent(location.href))">ZombieURL this</a>
 	</div>
 
   <p id="notice">Consider wisely who you send this to: Zombies have been known to scare children and the elderly.</p>
