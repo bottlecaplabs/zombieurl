@@ -32,7 +32,7 @@ class Link < ActiveRecord::Base
     end
     
     def build_permalink
-      self.permalink = DOMAIN_NAME + self.token
+      self.permalink = "http://" + DEPLOY_DOMAIN + "/" + self.token
     end
   
     def random_token
