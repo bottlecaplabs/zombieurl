@@ -54,6 +54,11 @@ a {
 	text-align: center;
 }
 
+#footer a.first {
+   background: transparent url('/images/bottlecap_labs_tiny.gif') no-repeat 0 50%;
+}
+
+
 #amazon {
    padding: 40px 90px;
 }
