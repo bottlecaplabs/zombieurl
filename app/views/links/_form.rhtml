@@ -1,5 +1,5 @@
 <% form_for :link, @link, :url => {:controller => :links ,:action => 'create'}  do |f| %>
   <label for="link_website_url">Type in a URL to Zombify:</label>
-  <%= f.text_field :website_url, {:value => "http://"} %>
+  <%= f.text_field :website_url, {:value => "http://"} %> <br />
   <%= submit_tag 'BRAAAAIIINS!', :id => 'submit' -%>
 <% end %>

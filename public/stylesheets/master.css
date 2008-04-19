@@ -4,7 +4,6 @@ body {
 	background-color: #fff;
 	font-size: 18px;
 	font-family: Arial, Helvetica, sans-serif;
-	overflow:hidden;
 }
 
 a {
@@ -23,8 +22,7 @@ a {
 }
 
 #form {
-	margin-left: 60px;
-	text-align: left;
+	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	font-size: 28px;
@@ -52,13 +50,20 @@ a {
 	font-size: small;
 	padding: 0 20px;
 	text-align: center;
+
+}
+
+
+#footer img {
+	margin-bottom: -8px;
 }
 
 #footer a.first {
-   background: transparent url('/images/bottlecap_labs_tiny.gif') no-repeat 0 50%;
+/*  background: transparent url('/images/bottlecap_labs_tiny.gif') no-repeat 0 50%;*/
 }
 
 
 #amazon {
   padding: 40px 80px;
+	height: 200px;
 }
