@@ -57,7 +57,7 @@
 <script type="text/javascript">
   Zombie.images = <%= ZOMBIE_IMAGES.collect{|i| "/images/zombies/#{i}"}.to_json -%>;
   Zombie.sounds = <%= ZOMBIE_SOUNDS.collect{|i| "/sounds/zombies/#{i}"}.to_json -%>;
-	Zombie.mailto_link = '<%= mailto( "Share the terror", "Checkout this cool link", "I found this and thought you would find it interesting:\n\n#{@link.permalink}\n\n Enjoy!" )  %>';
+	Zombie.mailto_link = '<%= mailto( "Share the terror", "Check out this cool link", "I found this and thought you would find it interesting:\n\n#{@link.permalink}\n\nEnjoy!" )  %>';
 	Zombie.spread_url = '<%= @link.permalink %>';
 </script>
 

@@ -1,12 +1,13 @@
 class LinksController < ApplicationController
 
-  def home
+  def index
     @link = Link.new
     render :action => 'index', :layout => "noscream"
   end
   
   def show
     @link = Link.find_by_token params[:token]
+    raise ActiveRecord::RecordNotFound unless @link
   end
 
   def create

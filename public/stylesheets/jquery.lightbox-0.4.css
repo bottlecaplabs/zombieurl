@@ -37,15 +37,7 @@
 	margin: 0 auto;
 }
 #lightbox-container-image { padding: 10px; }
-#lightbox-loading {
-	position: absolute;
-	top: 40%;
-	left: 0%;
-	height: 25%;
-	width: 100%;
-	text-align: center;
-	line-height: 0;
-}
+
 #lightbox-nav {
 	position: absolute;
 	top: 0;
